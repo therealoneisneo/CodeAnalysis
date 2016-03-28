@@ -138,10 +138,10 @@ class parser: # the instance to parse the .cov file
 		return
 
 if __name__ == "__main__":
-	# Parser = parser()
+	Parser = parser()
 	# Parser.readFile("Ant0.0-test-elem.cov")
-	# Parser.loadDir("/if22/br8jr/BitBuckets/uva_git/rtp/cov-data/")
+	Parser.loadDir("/if22/br8jr/BitBuckets/uva_git/rtp/cov-data/")
 	# Parser.loadDir("../rtptest/cov-data/")
-	# Parser.write2File("test.csv")
-	a = "123456789"
-	print a[1:]
+	Parser.write2File("test.csv")
+
+
