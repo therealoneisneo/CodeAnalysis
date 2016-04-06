@@ -2,8 +2,7 @@ predir=/localtmp/feng/buginfo
 
 currentBugId=a # a marker to store the current bugID
 
-for proj in Lang
-#Chart Closure Time Lang Math
+for proj in Chart Closure Time Lang Math
 do
 	# bugIndex=1
 	file=${predir}/${proj}TestName.txt
@@ -23,8 +22,8 @@ do
 		bugindex=${split[0]}
 		# echo $bugindex
 
-#		if [ $bugindex = 4 ]
-#		then
+	#	if [ $bugindex = 5 ]
+	#	then
 			
 			IFS=:: read -r -a testnames <<< "${split[1]}"
 			# declare -i pathnum
@@ -51,9 +50,10 @@ do
 
 			if [ "${bugIndex}" != "${currentBugId}" ]
 			then
-				#defects4j coverage
-				defects4j compile
-				# mv coverage.xml full_coverage.xml
+				rm coverage.xml
+				defects4j coverage
+				#defects4j compile
+				mv coverage.xml full_coverage.xml
 			fi
 
 
@@ -81,7 +81,7 @@ do
 			echo
 			echo "---------------------------------------------"
 			echo
-#		fi
+	#	fi
 
 
 
