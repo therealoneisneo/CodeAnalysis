@@ -178,14 +178,15 @@ class parser: # the instance to parse the .cov file
 	# 	return
 
 if __name__ == "__main__":
-	# if len(sys.argv) < 3:
-	# 	print "Usage: python <diff_file.txt> <output_file.csv>"
-	# inputfile = sys.argv[1]
-	# outputfile = sys.argv[2]
+	if len(sys.argv) < 3:
+		print "Usage: python <diff_file.txt> <output_file.csv>"
+		sys.exit()
+	inputfile = sys.argv[1]
+	outputfile = sys.argv[2]
 
 	Parser = parser()
 	# Parser.readFile("Ant0.0-test-elem.cov")
-	Parser.parseFile("diff.txt", "buggyinfo.csv")
+	Parser.parseFile(inputfile, outputfile)
 	# Parser.loadDir("../rtptest/cov-data/")
 	# Parser.write2File("test.csv")
 
