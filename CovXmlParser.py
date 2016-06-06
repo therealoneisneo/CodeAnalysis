@@ -1,65 +1,64 @@
-''' Xml parser for the coverage data'''
+# #!/usr/bin/python
+# # -*- coding: UTF-8 -*-
 
-import xml.sax
+# # from xml.dom.minidom import parse
+# import xml.dom.minidom as dom
+# import sys
+# import os
 
-class MovieHandler( xml.sax.ContentHandler ):
-   def __init__(self):
-      self.CurrentData = ""
-      self.type = ""
-      self.format = ""
-      self.year = ""
-      self.rating = ""
-      self.stars = ""
-      self.description = ""
 
-  
-   def startElement(self, tag, attributes):
-      self.CurrentData = tag
-      if tag == "movie":
-         print "*****Movie*****"
-         title = attributes["title"]
-         print "Title:", title
 
-  
-   def endElement(self, tag):
-      if self.CurrentData == "type":
-         print "Type:", self.type
-      elif self.CurrentData == "format":
-         print "Format:", self.format
-      elif self.CurrentData == "year":
-         print "Year:", self.year
-      elif self.CurrentData == "rating":
-         print "Rating:", self.rating
-      elif self.CurrentData == "stars":
-         print "Stars:", self.stars
-      elif self.CurrentData == "description":
-         print "Description:", self.description
-      self.CurrentData = ""
+# def ParseXML(filename, proj):
+# 	doc = dom.parse(filename)
 
-   # content
-   def characters(self, content):
-      if self.CurrentData == "type":
-         self.type = content
-      elif self.CurrentData == "format":
-         self.format = content
-      elif self.CurrentData == "year":
-         self.year = content
-      elif self.CurrentData == "rating":
-         self.rating = content
-      elif self.CurrentData == "stars":
-         self.stars = content
-      elif self.CurrentData == "description":
-         self.description = content
-  
-if __name__ == "__main__":
-   
-   # create XMLReader
-   parser = xml.sax.make_parser()
-   # turn off namepsaces
-   parser.setFeature(xml.sax.handler.feature_namespaces, 0)
+# 	bugID = "testID"
+# 	# outfilename = filename.split('/')[-1].split('.')[0] + ".csv"
+# 	outfilename = filename[:-3] + "csv"
+# 	outfile = open(outfilename, 'w')
+# 	outfile.write("idx,ProjectName,BugId,LineNo,Hits,Branch\n")
+# 	covClass = doc.getElementsByTagName("class")[0]
+# 	# covClass = covClass.getElementsByTagName()
+# 	methods = covClass.getElementsByTagName("methods")[0]
+# 	methods = methods.getElementsByTagName("method")
+# 	# print len(methods)
+# 	# lineIns = []
+# 	for method in methods:
+# 		lineset = method.getElementsByTagName("line")
+# 		for line in lineset:
+# 			hits = line.getAttribute("hits")
+# 			if hits != "0":
+# 				outfile.write(str(count) + ',' + proj + ',' + bugID + ',' + line.getAttribute("number") + ',' + line.getAttribute("hits") + ',')
+# 				# temp = LineCov(count, proj, bugID, line.getAttribute("number"), line.getAttribute("hits"))
+# 				branch = line.getAttribute("branch")
+# 				outfile.write(branch)
+# 			# if branch == "true":
+# 			#    condittions = 
+# 			#    outfile.write(',' + )
+# 			#condition process to be add
+# 				outfile.write('\n')
+# 	return
 
-   # rewirte ContextHandler
-   Handler = MovieHandler()
-   parser.setContentHandler( Handler )
-   
-   parser.parse("movies.xml")
+
+
+
+
+
+# rootdir = "Checkedout"
+# count = 0
+# for proj in ["Chart","Time","Lang","Closure","Math"]:
+# 	currentdir = os.path.join(rootdir, proj)
+# 	currentdir = os.path.join(currentdir, "covInfo")
+# 	for item in os.listdir(currentdir):
+# 		if item[-3:] == "xml"
+# 		filepath = os.path.join(currentdir, item)
+# 		ParseXML(filepath, proj)
+# 		print filepath
+# 		count += 1
+# print count
+
+
+# # doc = dom.parse("full_coverage.xml")
+
+a = "abcd.xml"
+if a[-3:] == "xml":
+	print 1
