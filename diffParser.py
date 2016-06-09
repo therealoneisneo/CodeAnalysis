@@ -126,56 +126,9 @@ class parser: # the instance to parse the .cov file
 					continue
 			
 
-
-			# for i in range(1, t_size):
-			# 	tempIns = CovInstances()
-			# 	parsestring = tempstring[i].strip()
-			# 	ID = self.instance_num
-			# 	OriString = tempstring[i]
-			# 	ind1 = tempstring[i].rindex('.')
-			# 	ClassName = tempstring[i][0:ind1]
-			# 	ind2 = tempstring[i].rindex(')')
-			# 	Method = tempstring[i][ind1 + 1:ind2 + 1]
-
-			# 	# print tempstring[i]
-				
-			# 	LineNum = None
-			# 	if CovType == "meth":
-			# 		# ReturnType = None
-			# 		ReturnType = tempstring[i][rindex(tempstring[i], ')') + 1 : rindex(tempstring[i], '-')]
-			# 	else:
-			# 		ReturnType = tempstring[i][rindex(tempstring[i], ')') + 1 : rindex(tempstring[i], ':')]
-			# 		LineNum = tempstring[i][rindex(tempstring[i], ':') + 1 : rindex(tempstring[i], '-')]
-			# 	Count = tempstring[i][rindex(tempstring[i], '-') + 1 :]
-			# 	tempIns.setValue(ID, OriString, TestName, CovType, ClassName, ReturnType, Count, Method, FileName, LineNum)
-			# 	self.InstanceDic[OriString] = tempIns
-			# 	self.InstancList.append(tempIns)
-			# 	self.instance_num += 1
-			# 	# tempIns.display()
-
 		inputfile.close()
 		outfile.close()
 		return
-	# def loadDir(self, dirName): # load the .cov file in the whole directory
-	# 	for root, dirs, files in os.walk(dirName):
-	# 		# for d in dirs: 
-	# 		# 	print os.path.join(root, d)
-	# 		for f in files:
-	# 			if f[rindex(f,'.') + 1:] == "cov":
-	# 				print "Processing file : " + os.path.join(root, f) + "..."
-	# 				self.readFile(os.path.join(root, f))
-	# 	print len(self.InstancList)
-	# 	return
-
-	# def write2File(self, filename):
-	# 	outfile = open(filename, 'w')
-	# 	print "Writing to file  " + filename + "..."
-	# 	outfile.write("ID,Filename,test_name,cov_type,classname,Method,return,cov-count,line_num,original_record\n")
-	# 	for item in self.InstancList:
-	# 		tempstring = str(item.insID) + "," + str(item.filename) + "," + str(item.test_name) + "," + str(item.cov_type) + "," + str(item.classname) + "," + str(item.method) + "," + str(item.return_type) + "," + str(item.cov_count) + "," + str(item.line_num) + "," + str(item.original_record) +"\n"
-	# 		outfile.write(tempstring)
-	# 	outfile.close()
-	# 	return
 
 if __name__ == "__main__":
 	if len(sys.argv) < 3:
