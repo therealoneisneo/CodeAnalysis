@@ -1,5 +1,8 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
+"""Parsing all coverage xml file into csv file within specified project"""
+__author__ = "jinlong Frank Feng"
+
 
 # from xml.dom.minidom import parse
 import xml.dom.minidom as dom
@@ -17,7 +20,9 @@ def ParseXML(filename, proj):
 	testname = filename.split("/")[-1][start + 1 : -4]
 	# print testname
 	outfilename = filename[:-3] + "csv"
+	outfilename = outfilename.replace("covInfoAll","cov_csv")
 	outfile = open(outfilename, 'w')
+	print outfilename
 	outfile.write("idx,ProjectName,BugId,FileName,MethodName,TestName, LineNo,Hits,isPass\n")
 	covClasses = doc.getElementsByTagName("class")
 	count = 0
@@ -33,7 +38,8 @@ def ParseXML(filename, proj):
 			for line in lineset:
 				hits = line.getAttribute("hits")
 				if hits != "0":
-					outfile.write(str(count) + ',' + proj + ',' + bugID + ',' +FileName + ',' + methodName + ',' + testname + ',' + line.getAttribute("number") + ',' + line.getAttribute("hits") + ',' + "False\n")
+					outfile.write(str(count) + ',' + proj + ',' + bugID + ',' +FileName + ',' + methodName + ',' + testname + ',' + line.getAttribute("number") + ',' + line.getAttribute("hits") + ',' + "True\n")  # set isPass as True for all instance and mark the buggy line after wards
+
 					# branch = line.getAttribute("branch")
 					# outfile.write(branch)
 					# outfile.write('\n')
@@ -48,9 +54,10 @@ def ParseXML(filename, proj):
 rootdir = "Checkedout"
 # rootdir = "../Verify_coverage"
 count = 0
-for proj in ["Chart","Time","Lang","Closure","Math"]:
+for proj in ["Chart"]: #,"Time","Lang","Closure","Math"]:
 	currentdir = os.path.join(rootdir, proj)
-	currentdir = os.path.join(currentdir, "covInfo")
+	# currentdir = os.path.join(currentdir, "covInfo")
+	currentdir = os.path.join(currentdir, "covInfoAll")
 	for item in os.listdir(currentdir):
 		if item[-3:] == "xml":
 			filepath = os.path.join(currentdir, item)
@@ -69,6 +76,4 @@ print count
 # 		# print count
 # 		if count > 3:
 # 			break
-
-
 
