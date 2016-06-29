@@ -51,8 +51,8 @@ for proj in ["Chart"]: #,"Time","Lang","Closure","Math"]:
 				sp = tempstring.split(',')
 				if sp[0] != "idx":
 					bugid = sp[2]
-					testclass = sp[6].split('_')[0]
-					testmethod = sp[6].split('_')[1]
+					testclass = sp[5].split('_')[0]
+					testmethod = sp[5].split('_')[1]
 					for item in lookup:
 						if bugid == item[0] and testclass == item[1] and testmethod == item[2]:
 							tempstring = tempstring.replace("True","False")

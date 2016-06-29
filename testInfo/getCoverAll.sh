@@ -4,10 +4,12 @@ predir=/localtmp/feng/testInfo
 
 currentBugId=a # a marker to store the current bugID
 
+targetBugId=$1
+
 for proj in Chart #Closure Time Lang Math
 do
 	# bugIndex=1
-	file=${predir}/${proj}TestMethodsAll.txt
+	file=${predir}/${proj}TestMethods_data.txt
 	proj_dir=/localtmp/feng/Checkedout/${proj}
 	cov_dir=${proj_dir}/covInfoAll
 		# echo $file
@@ -22,6 +24,9 @@ do
 		# echo ${#split[@]}
 		# echo $split
 		bugindex=${split[0]}
+		if [ $bugindex != $targetBugId ];then
+		continue
+		fi
 		# echo $bugindex
 
 	#	if [ $bugindex = 5 ]

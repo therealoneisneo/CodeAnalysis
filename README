@@ -1,0 +1,30 @@
+Readme.txt by Frank Feng, June 2016
+A brief tutorial, the root_dir is the top level folder of this specific task. In my current case, root_dir is /localtmp/feng/ in Hitchcock.
+***The out put method is either by running "./script.sh > outputfile.txt" or specify output filename in the script(including pass in arguments)***
+
+1.Defects4j setup
+	1). Install defects4j. Details in https://github.com/rjust/defects4j.
+	2). Following the instructions above and you will find the defects4j project in root_dir/defects4j. Then modify and run “source root_dir/init.sh” to setup the $PATH, run it every time as you login a new session. 
+
+2. Check out projects
+	Defects4j contains a number of versions of 5 projects, to check out all of them, modify the $rootdir in chkout.sh as the place you desired and run chkout.sh to checkout all versions of 5 projects. The location will be $rootdir/$project_name/$bugID/("buggy" or "fix").
+
+3. Get information of bugs
+	All related scripts and operation in this step is in root_dir/buginfo/. Take “Chart” as an example:
+	1). To get summary of all bugs, modify getBugSummary.sh to keep only one project active at a time and comment out other actions.
+	2). Store its output in “ChartBug.txt” by running  “./getBugSummary.sh > ChartBug.txt”.
+	3). After get all 5 ${proj}Bug.txt files, run getTestName.sh to extract the information of failing tests into ${proj}TestName.txt, in this file, each entry contains the bugID and the test class and test method.
+	4). Using similar strategy in getTestName.sh and apply on getModifiedSource.py to get the list of modified source file of each bug, target file would be ${proj}SourceName.txt.
+	5). To get the actual lines that fixed bugs, back to the root_dir, run script diff.sh and out put its result to a test file diff.txt.
+	6). Use diffParser.py with input arguments to specify input file(diff.txt) and output file(a csv file) to get details of line differences.
+
+4. Line coverage information. (This part has been covered by the full coverage generation, so it seems irrelevant now).
+	The scripts in folder root_dir/getCoverScript/ with project name(Chart.sh) can get the .xml coverage report of buggy tests only, results stored in the root_dir/Checkedout/${proj}/covInfo/, the naming pattern is bugid_testclass_testmethod.xml.
+
+5. Full test coverage info.
+	The info file of full test is stored in root_dir/testInfo/, there are several types of info(Take Chart as example).
+	1). (Consider all test.java has been compiled into test.class by defects4j already, details can be found in defects4j manual) Modify getAllTestClasses.py to specify the range of bugId and the path for the test classes. By running this can output the list of all test.class file under the path and store this result in ChartTestClasses.txt.
+	2). Modify pathes in extractTestMethods.sh and run it to apply javap on the test.class listed in ChartTestClasses.txt and extract all methods in these classes. Output and store the raw results in ChartTestMethods_raw.txt.
+	3). Modify getTestMethodsFromList.py to specify the input and output file(ChartTestMethods.txt) and run it to filter the test methods(only keep the methods that are actully testing something).
+	4). Modify getCoverAll.sh to specify the file of test methods list, project name and path to store full coverage report, currently is root_dir/Checkedout/{proj}/covInfoAll/. This getCoverAll.sh will take one argument to specify the index of the buggy version being running. Using run.sh can run multiple coverage analysis simultaneously. 
+	5). After all .xml reports being generated, in roor_dir, modify and run CovXmlParser.py to parse all the .xml file in covInfoAll/ into same_name.csv files in the same folder. Then modify and run merge_csv.py to merge all these csv files into one single csv file and mark the lines that covered in failing test.(the individual csv files in covInfoAll does not contain info of whether a line is failing or passing, this info was examined during the merge in merge_csv.py)
